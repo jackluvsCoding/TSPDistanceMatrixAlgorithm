@@ -1,0 +1,29 @@
+package matrix;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import locations.Location;
+
+public class BuildMatrix {
+
+	public ArrayList<Location> getLocations() throws FileNotFoundException, IOException, ParseException {
+		ArrayList<Location> locations = new ArrayList<Location>();
+
+		JSONArray jsonObject = (JSONArray) new JSONParser().parse(new FileReader("./Locations.json"));
+		
+		for(int i = 0; i<=jsonObject.size(); i++) {
+			
+		}
+
+		return locations;
+
+	}
+
+}

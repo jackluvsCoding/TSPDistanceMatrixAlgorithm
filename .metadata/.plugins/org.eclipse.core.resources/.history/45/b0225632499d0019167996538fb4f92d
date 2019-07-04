@@ -1,0 +1,10 @@
+package matrix;
+
+public class BuildMatrix {
+	
+	
+	public ArrayList<Location> getLocations() {
+		
+	}
+
+}

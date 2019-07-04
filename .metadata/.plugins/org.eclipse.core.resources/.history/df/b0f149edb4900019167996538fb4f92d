@@ -1,0 +1,44 @@
+package api;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+public class GetDistance {
+
+	private static String url = "https://maps.googleapis.com/maps/api/distancematrix/json";
+
+	public ResponseEntity<String> getDistance(String origin, String destination)
+			throws FileNotFoundException, IOException, ParseException {
+
+		// parsing file "JSONExample.json"
+		JSONObject jsonObject = (JSONObject) new JSONParser().parse(new FileReader("./secrets.json"));
+
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("units", "imperial");
+		params.put("origins", origin);
+		params.put("destinations", destination);
+		params.put("key", (String) jsonObject.get("key"));
+
+		System.out.println(params.toString());
+		System.out.println("\u2022" + jsonObject.get("key"));
+
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> result = restTemplate.getForEntity(url, String.class, params);
+
+		JSONObject json_data = (JSONObject) new JSONParser().parse(result);
+		System.out.println("\u2022" + json_data.get("error_message"));
+
+		return result;
+
+	}
+
+}

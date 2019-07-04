@@ -1,0 +1,25 @@
+package api;
+
+import java.util.List;
+
+public class Distance {
+
+	List<String> destination_addresses;
+	List<String> origin_addresses;
+	List<Elements> rows;
+
+}
+
+private class Elements {
+	List<Duration> elements;
+}
+
+private class Duration {
+	String text;
+	int value;
+	
+	public String toString() {
+		return "duration{" + "text=" + text + ", value=" + value + "}";
+	}
+	
+}

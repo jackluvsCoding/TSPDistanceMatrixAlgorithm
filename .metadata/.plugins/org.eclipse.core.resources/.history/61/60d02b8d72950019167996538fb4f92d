@@ -1,0 +1,31 @@
+package main;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+
+import api.Get;
+
+public class Main {
+
+	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+
+		Get get = new Get();
+
+		JSONObject jsonObject = get.distanceMatrixAPI("38.587704,-122.575908", "38.590216,-122.594063");
+
+		// TEST Output
+		System.out.println(jsonObject.toString());
+		System.out.println("[Origin]: \t" + get.getAddress(jsonObject, "origin_addresses"));
+		System.out.println("[Destination]: \t" + get.getAddress(jsonObject, "destination_addresses"));
+		System.out.println("[Distance]: \t" + get.getElement(jsonObject, "distance"));
+		System.out.println("[Duration]: \t" + get.getElement(jsonObject, "duration"));
+		System.out.println("[Distance (miles)]: \t" + get.convertMetersToMiles(get.getElement(jsonObject, "distance")));
+		System.out.println(
+				"[Duration (mins)]: \t" + get.convertSecondsToMinutes((long) get.getElement(jsonObject, "duration")));
+
+	}
+
+}

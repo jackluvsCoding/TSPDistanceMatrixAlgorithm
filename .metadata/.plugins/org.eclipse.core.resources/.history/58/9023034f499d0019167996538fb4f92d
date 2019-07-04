@@ -1,0 +1,15 @@
+package matrix;
+
+import java.util.ArrayList;
+
+import locations.Location;
+
+public class BuildMatrix {
+
+	public ArrayList<Location> getLocations() {
+		
+		List<Location> locations = new ArrayList<Location>(); 
+
+	}
+
+}

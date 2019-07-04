@@ -1,0 +1,133 @@
+package matrix;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import api.Get;
+import locations.Location;
+
+public class BuildMatrix {
+
+	private ArrayList<Location> locations;
+	private File matrixFile;
+	private static Get get = new Get();
+
+	/**
+	 * Essentially this function acts as the driver for this class.
+	 *
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	public void buildMatrix() throws FileNotFoundException, IOException, ParseException {
+		locations = getLocations();
+		makeFile("matrix");
+		drawMatrix(locations);
+
+	}
+
+	/**
+	 *
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	private ArrayList<Location> getLocations() throws FileNotFoundException, IOException, ParseException {
+		locations = new ArrayList<Location>();
+
+		JSONArray jsonObject = (JSONArray) new JSONParser().parse(new FileReader("./Locations.json"));
+
+		for (int i = 0; i < jsonObject.size(); i++) {
+			JSONObject json_object = (JSONObject) jsonObject.get(i);
+			String name = (String) json_object.get("name");
+			String shortDescription = (String) json_object.get("shortDescription");
+			String address = (String) json_object.get("address");
+			String coordinate = (String) json_object.get("coordinate");
+			Location location = new Location(name, shortDescription, address, coordinate);
+			locations.add(location);
+		}
+		System.out.println(locations.toString());
+		return locations;
+	}
+
+	/**
+	 * Writes the file using locations
+	 *
+	 * @param locations
+	 * @throws IOException
+	 * @throws ParseException
+	 */
+	private void drawMatrix(ArrayList<Location> locations) throws IOException, ParseException {
+		System.out.println("File Size: " + matrixFile.length());
+		Collections.sort(locations);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(matrixFile));
+		int apiHitCount = 0;
+
+		// Write the first line
+		writer.append(" - ");
+		for (int i = 0; i < locations.size(); i++) {
+			writer.append(locations.get(i).getShortDescription());
+			if (i != locations.size() - 1) {
+				writer.append(" ");
+			} else {
+				writer.newLine();
+			}
+		}
+
+		// Write the following lines
+		for (int row = 0; row < locations.size(); row++) {
+			writer.append(locations.get(row).getShortDescription() + " ");
+
+			for (int column = 0; column < locations.size(); column++) {
+				if (column == row) {
+					writer.append("0\t");
+				} else {
+					String origin = locations.get(row).getCoordinates();
+					String destination = locations.get(column).getCoordinates();
+					JSONObject distance = get.distanceMatrixAPI(origin, destination);
+					long duration = get.convertSecondsToMinutes(get.getElement(distance, "duration"));
+					apiHitCount++;
+					System.out.println("[row: " + (row + 1) + ", column: " + column + "]\n" + "Origin: "
+							+ locations.get(row).getName() + " (" + locations.get(row).getShortDescription() + ")"
+							+ ", Coordinates: " + origin + "\n" + "Destination: " + locations.get(column).getName()
+							+ " (" + locations.get(column).getShortDescription() + ")" + ", Coordinates: " + destination
+							+ "\n" + "Duration: " + duration + " mins.\n" + "API Hit Count: " + apiHitCount + "\n");
+					writer.append(duration + "\t");
+				}
+			}
+			if (row != locations.size()) {
+				writer.newLine();
+			}
+		}
+
+		// Close writer and exit
+		writer.close();
+		System.out.println("File Size: " + matrixFile.length());
+	}
+
+	/**
+	 *
+	 * @param fileName
+	 */
+	private void makeFile(String fileName) {
+		try {
+			matrixFile = new File("./" + fileName);
+			matrixFile.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

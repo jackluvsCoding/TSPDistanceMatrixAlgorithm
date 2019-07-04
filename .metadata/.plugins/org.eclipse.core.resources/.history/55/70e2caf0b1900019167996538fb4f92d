@@ -1,0 +1,22 @@
+package main;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
+
+import com.github.cliftonlabs.json_simple.JsonObject;
+
+import api.GetDistance;
+
+public class Main {
+
+	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+
+		GetDistance getDistance = new GetDistance();
+
+		JSONObject jsonObject = getDistance.getDistance("38.587704,-122.575908", "38.590216,-122.594063");
+
+	}
+
+}

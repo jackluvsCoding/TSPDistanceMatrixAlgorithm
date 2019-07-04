@@ -1,0 +1,7 @@
+1561254909870	Rename local variable 'duration_data'
+1561255086391	Rename local variable 'elements_data'
+1561258954739	Delete element
+1561259011301	Rename type 'GetDistance'
+1561259046558	Rename method 'getDistance'
+1561259083503	Rename local variable 'getDistance'
+1561262957290	Rename method 'getDistanceInMiles'

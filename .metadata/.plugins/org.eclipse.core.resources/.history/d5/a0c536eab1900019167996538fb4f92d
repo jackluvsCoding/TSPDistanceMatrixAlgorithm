@@ -1,0 +1,15 @@
+package main;
+
+import api.GetDistance;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		GetDistance getDistance = new GetDistance();
+
+		getDistance.getDistance("38.587704,-122.575908", "38.590216,-122.594063");
+
+	}
+
+}

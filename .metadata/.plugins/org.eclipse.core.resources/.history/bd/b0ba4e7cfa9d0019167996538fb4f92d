@@ -1,0 +1,7 @@
+package locations;
+
+import java.util.Comparator;
+
+public class SortyByShortDescription implements Comparator<Location> {
+
+}

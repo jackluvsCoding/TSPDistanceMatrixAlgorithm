@@ -1,0 +1,42 @@
+package api;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.web.client.RestTemplate;
+
+public class GetDistance {
+	
+	private static String url = "https://maps.googleapis.com/maps/api/distancematrix/json";
+	
+	public JSONObject getDistance(String origin, String destination) throws FileNotFoundException, IOException, ParseException {
+		
+		// parsing file "JSONExample.json" 
+        Object object = new JSONParser().parse(new FileReader("./secrets.json")); 
+          
+        // type casting object to JSONObject 
+        JSONObject jsonObject = (JSONObject) object; 
+        
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("units", "imperial");
+        params.put("origins", origin);
+        params.put("destinations", destination);
+        params.put("key", (String) jsonObject.get("key"));
+        
+        System.out.println(params.toString());
+       
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(url, responseType, params);
+    
+    
+        return jsonObject; 
+		
+	}
+
+}

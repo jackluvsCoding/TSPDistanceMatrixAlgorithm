@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Tudal Family Winery",
+    "shortDescription": "TFW",
+    "address": "1015 Big Tree Road St. Helena, CA 94574",
+    "coordinate": "38.547912,-122.503549"
+  },
+  {
+    "name": "Storybook Mountain Vineyards",
+    "shortDescription": "SMV",
+    "address": "3835 Highway 128 Calistoga, CA 94515",
+    "coordinate": "38.602339,-122.638376"
+  },
+  {
+    "name": "Castello Di Amorosa",
+    "shortDescription": "CDA",
+    "address": " 4045 St Helena Highway Calistoga, CA 94515",
+    "coordinate": "38.558534,-122.542225"
+  },
+  {
+    "name": "Davis Estates",
+    "shortDescription": "DVS",
+    "address": "4060 Silverado Trail Calistoga, CA 94515",
+    "coordinate": "38.569495,-122.515016"
+  },
+  {
+    "name": "Chateau Montelena Winery",
+    "shortDescription": "CMW",
+    "address": "1429 Tubbs Lane Calistoga, CA 94515",
+    "coordinate": "38.602698,-122.597110"
+  },
+  {
+    "name": "Tank Garage Winery",
+    "shortDescription": "TGW",
+    "address": "1020 Foothill Blvd. Calistoga, CA 94515",
+    "coordinate": "38.575276,-122.579193"
+  },
+  {
+    "name": "Tedeschi Family Winery",
+    "shortDescription": "TDS",
+    "address": "2779 Grant St. Calistoga, CA 94515",
+    "coordinate": "38.590430,-122.593562"
+  },
+  {
+    "name": "Sterling Vineyards",
+    "shortDescription": "STV",
+    "address": "1111 Dunaweal Lane, Calistoga, CA 94515",
+    "coordinate": "38.568519,-122.547907"
+  },
+  {
+    "name": "Calistoga Motor Lodge and Spa",
+    "shortDescription": "CML",
+    "address": "1880 Lincoln Ave, Calistoga, CA 94515",
+    "coordinate": "38.587569,-122.575458"
+  }
+]

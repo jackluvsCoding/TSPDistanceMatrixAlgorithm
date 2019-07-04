@@ -1,0 +1,27 @@
+package api;
+
+import java.io.FileReader;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.github.cliftonlabs.json_simple.JsonObject;
+
+public class GetDistance {
+	
+	public JsonObject getDistance(String origin, String destination) {
+		
+		// parsing file "JSONExample.json" 
+        Object obj = new JSONParser().parse(new FileReader("./secrets.json")); 
+          
+        // type casting obj to JSONObject 
+        JSONObject jo = (JSONObject) obj; 
+        
+        System.out.println("Key: " + jo.get("key"));
+
+        
+        return jo;
+		
+	}
+
+}
