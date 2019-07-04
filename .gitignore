@@ -1,6 +1,6 @@
 ./metadata/
 
 secrets.json
-.metadata
+*.metadata
 /bin/
 /.metadata/
